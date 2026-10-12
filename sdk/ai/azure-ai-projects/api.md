@@ -654,6 +654,7 @@ namespace azure.ai.projects.aio.operations
                 extra_headers: Optional[Mapping[str, str]] = ..., 
                 extra_query: Optional[Mapping[str, str]] = ..., 
                 structured_inputs: Optional[Mapping[str, Any]] = ..., 
+                transport: Optional[Union[str, VoiceAgentTransport]] = ...,
                 **kwargs: Any
             ) -> AsyncBetaRealtimeConnectionManager: ...
 
@@ -698,6 +699,7 @@ namespace azure.ai.projects.aio.operations
                 extra_headers: Optional[Mapping[str, str]] = ..., 
                 extra_query: Optional[Mapping[str, str]] = ..., 
                 structured_inputs: Optional[Mapping[str, Any]] = ..., 
+                transport: Optional[Union[str, VoiceAgentTransport]] = ...,
                 **kwargs: Any
             ) -> None: ...
 
@@ -6256,11 +6258,11 @@ namespace azure.ai.projects.models
         def __init__(self, mapping: Mapping[str, Any]) -> None: ...
 
 
-    class azure.ai.projects.models.CreateTeamsPhoneExtensionTelephonyBindingRequest(CreateTelephonyBindingRequest, discriminator='teams_phone_extension'):
+    class azure.ai.projects.models.CreateTeamsPhoneExtensibilityTelephonyBindingRequest(CreateTelephonyBindingRequest, discriminator='teams_phone_extensibility'):
         connection_name: str
         label: str
         phone_number: Optional[str]
-        provider: Literal[TelephonyProvider.TEAMS_PHONE_EXTENSION]
+        provider: Literal[TelephonyProvider.TEAMS_PHONE_EXTENSIBILITY]
         resource_account_object_id: str
 
         @overload
@@ -13293,13 +13295,13 @@ namespace azure.ai.projects.models
         def __init__(self, mapping: Mapping[str, Any]) -> None: ...
 
 
-    class azure.ai.projects.models.TeamsPhoneExtensionTelephonyBinding(TelephonyBinding, discriminator='teams_phone_extension'):
+    class azure.ai.projects.models.TeamsPhoneExtensibilityTelephonyBinding(TelephonyBinding, discriminator='teams_phone_extensibility'):
         connection_name: str
         id: str
         incoming_call_url: str
         label: str
         phone_number: Optional[str]
-        provider: Literal[TelephonyProvider.TEAMS_PHONE_EXTENSION]
+        provider: Literal[TelephonyProvider.TEAMS_PHONE_EXTENSIBILITY]
         resource_account_object_id: str
         status: Union[str, TelephonyBindingStatus]
 
@@ -13320,14 +13322,14 @@ namespace azure.ai.projects.models
         def __init__(self, mapping: Mapping[str, Any]) -> None: ...
 
 
-    class azure.ai.projects.models.TeamsPhoneExtensionTelephonyBindingListItem(TelephonyBindingListItem, discriminator='teams_phone_extension'):
+    class azure.ai.projects.models.TeamsPhoneExtensibilityTelephonyBindingListItem(TelephonyBindingListItem, discriminator='teams_phone_extensibility'):
         connection_name: str
         etag: str
         id: str
         incoming_call_url: str
         label: str
         phone_number: Optional[str]
-        provider: Literal[TelephonyProvider.TEAMS_PHONE_EXTENSION]
+        provider: Literal[TelephonyProvider.TEAMS_PHONE_EXTENSIBILITY]
         resource_account_object_id: str
         status: Union[str, TelephonyBindingStatus]
 
@@ -13735,7 +13737,7 @@ namespace azure.ai.projects.models
 
     class azure.ai.projects.models.TelephonyCallLifecycleEventSource(str, Enum, metaclass=CaseInsensitiveEnumMeta):
         GATEWAY = "gateway"
-        TEAMS_PHONE_EXTENSION = "teams_phone_extension"
+        TEAMS_PHONE_EXTENSIBILITY = "teams_phone_extensibility"
         TWILIO = "twilio"
         VOICE_AGENT = "voice_agent"
 
@@ -13997,7 +13999,7 @@ namespace azure.ai.projects.models
 
 
     class azure.ai.projects.models.TelephonyProvider(str, Enum, metaclass=CaseInsensitiveEnumMeta):
-        TEAMS_PHONE_EXTENSION = "teams_phone_extension"
+        TEAMS_PHONE_EXTENSIBILITY = "teams_phone_extensibility"
         TWILIO = "twilio"
 
 
@@ -16814,6 +16816,11 @@ namespace azure.ai.projects.models
         def __init__(self, mapping: Mapping[str, Any]) -> None: ...
 
 
+    class azure.ai.projects.models.VoiceAgentTransport(str, Enum, metaclass=CaseInsensitiveEnumMeta):
+        WEBRTC = "webrtc"
+        WEBSOCKET = "websocket"
+
+
     class azure.ai.projects.models.VoiceAgentTurnDetectionConfig(_Model):
         auto_truncate: Optional[bool]
         type: str
@@ -18867,6 +18874,7 @@ namespace azure.ai.projects.operations
                 extra_headers: Optional[Mapping[str, str]] = ..., 
                 extra_query: Optional[Mapping[str, str]] = ..., 
                 structured_inputs: Optional[Mapping[str, Any]] = ..., 
+                transport: Optional[Union[str, VoiceAgentTransport]] = ...,
                 **kwargs: Any
             ) -> BetaRealtimeConnectionManager: ...
 
@@ -18911,6 +18919,7 @@ namespace azure.ai.projects.operations
                 extra_headers: Optional[Mapping[str, str]] = ..., 
                 extra_query: Optional[Mapping[str, str]] = ..., 
                 structured_inputs: Optional[Mapping[str, Any]] = ..., 
+                transport: Optional[Union[str, VoiceAgentTransport]] = ...,
                 **kwargs: Any
             ) -> None: ...
 
