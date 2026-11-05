@@ -53,7 +53,7 @@ this artifact is a preview, not a PyPI release.
 
 ## Standalone queued V3 development artifact
 
-`2.7.0b7.dev20261104+queuedv3.2` provides explicitly selected durable queued V3
+`2.7.0b7.dev20261104+queuedv3.3` provides explicitly selected durable queued V3
 rollout transport. It is a **development-only artifact**, not an approved registry
 release or a PyPI publication. The approved registry, `latest` (`2.7.2b1`), existing
 installer and all previously published wheels/checksums are unchanged. The SDK
@@ -64,20 +64,24 @@ To select the development artifact explicitly, use its immutable public commit
 URL with a SHA-256 pin:
 
 ```powershell
-python -m pip install "azure-ai-projects[rle] @ https://raw.githubusercontent.com/swatisinghvi99/azure-sdk-for-python/16c1d8963a467285b7113d323d54fd9ed7452ccb/sdk/ai/azure-ai-projects/rle/wheels/2.7.0b7.dev20261104+queuedv3.2/azure_ai_projects-2.7.0b7.dev20261104+queuedv3.2-py3-none-any.whl#sha256=6a368b26ea32d8611a35cb76ae42ef93bcb618a52a56b25a1c94f87a6e9d401d"
+python -m pip install "azure-ai-projects[rle] @ https://raw.githubusercontent.com/swatisinghvi99/azure-sdk-for-python/9d53899d688ac00cf239d5c25d01c37dd44f6116/sdk/ai/azure-ai-projects/rle/wheels/2.7.0b7.dev20261104+queuedv3.3/azure_ai_projects-2.7.0b7.dev20261104+queuedv3.3-py3-none-any.whl#sha256=ee4630608daeda2a539e3a2f98f2da1dc90e89a577c61dc23edaff4ac6afbf87"
 ```
 
 The wheel is anonymously readable from the public fork and contains no GitHub
 credentials. Pip verifies the pinned hash before installation. It is deliberately
 not selected by the registry installer or its `--version` option. See the
-[artifact documentation](wheels/2.7.0b7.dev20261104+queuedv3.2/README.md) and
-[provenance](wheels/2.7.0b7.dev20261104+queuedv3.2/provenance.json) for the public API,
+[artifact documentation](wheels/2.7.0b7.dev20261104+queuedv3.3/README.md) and
+[provenance](wheels/2.7.0b7.dev20261104+queuedv3.3/provenance.json) for the public API,
 source identity and offline validation evidence.
 
-The `.2` development build rechecks connection expiry before every submission,
+The `.3` development build accepts the service's bounded opaque job IDs unchanged:
+case-sensitive `ftjob-` prefix, ASCII letters/digits/`._~-`, at most 991 characters
+total, without a fixed suffix length. Managed 32-hex and legacy 24-hex IDs both
+work. This corrects local validation before handshake, not deployed qualification.
+It also retains the `.2` fix that rechecks connection expiry before every submission,
 including after a backpressured send. Rotation attaches already submitted IDs
-without replaying execute or resetting deadlines/admission permits. The `.1`
-wheel remains available unchanged; no existing artifact is overwritten.
+without replaying execute or resetting deadlines/admission permits. The `.1` and
+`.2` wheels remain available unchanged; no existing artifact is overwritten.
 
 Consumers opt into queued delivery with
 `get_rollout_client(..., protocol_version="v3")`; omission retains legacy defaults.
